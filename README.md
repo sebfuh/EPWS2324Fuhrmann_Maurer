@@ -6,7 +6,7 @@
 link: https://www.notion.so/Entwicklungsprojekt-237c60b22ae0411383fa90e491e709b3?pvs=4
 
 # Exposé 
-**Anwendung/Website zur gemeinsamen Nutzung von Rezepten und Rezeptsammlungen auf mehreren Endgeräten** 
+### **Anwendung/Website zur gemeinsamen Nutzung von Rezepten und Rezeptsammlungen auf mehreren Endgeräten** 
 
 **Projektidee**:
 Die Projektidee besteht darin, eine Anwendung oder Website zu entwickeln, die es Benutzern ermöglicht, ihre Rezeptsammlungen auf mehreren Endgeräten zu teilen und gleichzeitig die Zutaten in ihren Kühlschränken effektiv zu verwalten. Die Anwendung wir durch einen Barcode Scanner erweitert, um das Hinzufügen von Zutaten zu erleichtern, indem sie die Barcodes der  verfügbaren Zutaten erkennt und verwendet, um passende Rezepte zu generieren.
