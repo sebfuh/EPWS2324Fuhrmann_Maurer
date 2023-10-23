@@ -19,6 +19,7 @@ Die Projektidee besteht darin, eine Anwendung oder Website zu entwickeln, die es
 4. Benutzerkonten zur Speicherung von Rezepten und Erfassung des Kühlschrankinhalts durch Scannen.
 
 **Umsetzung**:
+
 Die Umsetzung der oben genannten Ziele erfordert eine intelligente Verbindung von Technologien und Datenquellen. Hier sind einige Schritte zur Implementierung:
 
 1. **Benutzerregistrierung und -profile**: Benutzer können sich anmelden und persönliche Profile erstellen, um ihre Rezeptsammlungen zu verwalten.
