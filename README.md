@@ -3,7 +3,7 @@
 
 ## Projektkommunikation und Fortführung von Angelina Maurer und Sebastian Fuhrmann über Notion:
 
-link: https://www.notion.so/Entwicklungsprojekt-237c60b22ae0411383fa90e491e709b3?pvs=4
+link: https://modern-oatmeal-3af.notion.site/Entwicklungsprojekt-237c60b22ae0411383fa90e491e709b3?pvs=4
 
 # Exposé 
 ### **Anwendung/Website zur gemeinsamen Nutzung von Rezepten und Rezeptsammlungen auf mehreren Endgeräten** 
