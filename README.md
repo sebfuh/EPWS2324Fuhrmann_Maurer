@@ -5,7 +5,7 @@
 
 link: https://modern-oatmeal-3af.notion.site/Entwicklungsprojekt-237c60b22ae0411383fa90e491e709b3?pvs=4
 
-# Artefakte:
+## Artefakte 1.Audit:
 - Projektplan
 - Stakeholder
 - Domänenmodell deskriptiv / präskriptiv
