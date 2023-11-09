@@ -8,6 +8,7 @@ link: https://modern-oatmeal-3af.notion.site/Entwicklungsprojekt-237c60b22ae0411
 ## Artefakte 1.Audit:
 - Projektplan
 - Stakeholder
+- Persona 
 - Domänenmodell deskriptiv / präskriptiv
 - Task Scenario
 - Use Scenario
