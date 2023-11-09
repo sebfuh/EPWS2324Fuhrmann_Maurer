@@ -15,34 +15,32 @@ link: https://modern-oatmeal-3af.notion.site/Entwicklungsprojekt-237c60b22ae0411
 
 
 # Exposé: 
-**Anwendung/Website zur gemeinsamen Nutzung von Rezepten und Rezeptsammlungen auf mehreren Endgeräten** 
+**System zur einfachen Erkennung und Organisation von Lebensmitteln** 
 
 **Projektidee**:
-Die Projektidee besteht darin, eine Anwendung zu entwickeln, die es Benutzern ermöglicht, ihre Rezeptsammlungen auf mehreren Endgeräten zu teilen und gleichzeitig die Zutaten in ihren Kühlschränken effektiv zu verwalten. Die Anwendung wir durch eine passende Erkennung der Lebensmittel erweitert, um das Hinzufügen von Zutaten zu erleichtern, indem sie die vorhandenen Nahrungsmittel anhand verschiedener Merkmale erkennt. Diese werden dann verwendet um dem Nutzer passende Rezepte zu generieren.
+Das System soll den Benutzern eine einfache und schnelle Möglichkeit bieten, ihre Lebensmittel zu verwalten. Die Software wird durch eine passende Erkennung der Lebensmittel erweitert, um das Hinzufügen von Zutaten zu erleichtern, indem sie die vorhandenen Lebensmittel anhand bestimmter Merkmale erkennt. Diese werden dann in einer Datenbank gespeichert und über ein Online-Inventar organisiert.
 
 **Ziele**:
 
-1. Effizientes Verwalten und Teilen von Rezeptsammlungen über verschiedene Endgeräte.
-2. Vereinfachtes Erfassen von Zutaten im Kühlschrank mithilfe einer passenden Erkennung.
-3. Generierung von Rezeptvorschlägen basierend auf den verfügbaren Zutaten.
-4. Benutzerkonten zur Speicherung von Rezepten und Erfassung des Kühlschrankinhalts durch Scannen.
+1. Effizientes Verwalten von Lebensmitteln über verschiedene Endgeräte.
+2. Vereinfachtes Erfassen von Lebensmittel im Kühlschrank mithilfe einer passenden Erkennung.
+3. Benutzerkonten besitzen unterteilte Nutzerbereiche innerhalb eines Lebensraumes. (zb. getrennte Benutzerkonten innerhalb einer Wohngemeinschaft)
 
 **Umsetzung**:
 Die Umsetzung der oben genannten Ziele erfordert eine intelligente Verbindung von Technologien und Datenquellen. Hier sind einige Schritte zur Implementierung:
 
-1. **Benutzerregistrierung und -profile**: Benutzer können sich anmelden und persönliche Profile erstellen, um ihre Rezeptsammlungen zu verwalten.
-2. **Erfassung des Kühlschrankinhalts**: Benutzer können ihre Kühlschrankinhalte mit einer passenden Lebensmittel-Erkennung erfassen, um die verfügbaren Zutaten zu überwachen (und einsehen zu können).
-3. **Rezeptgenerierung**: Die Anwendung verwendet die erfassten Daten, um passende Rezepte vorzuschlagen, die auf den verfügbaren Zutaten basieren.
-4. **Benachrichtigungen und Einkaufslisten**: Die Anwendung kann Benutzer über fehlende Zutaten informieren und automatisch Einkaufslisten generieren, um diese Zutaten zu beschaffen.
-5. **Weboberfläche**: Die Anwendung sollte als Webanwendung funktionieren. Hierbei sollen alle Screengrößen beachtet werden, um eine breite Nutzerbasis zu erreichen.
+1. **Benutzerregistrierung und -profile**: Benutzer können sich anmelden und persönliche Profile erstellen um Zugriff auf abgetrennte Bereiche zu erlangen, in denen sie ihre “eigenen” Lebensmittel einsehen können.
+2. **Erfassung der Lebensmittel**: Benutzer können ihre Lebensmittel mit einer passenden Erkennung erfassen, um die verfügbaren Zutaten zu überwachen (und einsehen zu können).
+3. **Art der Lebensmittelerfassung:** Benutzer können Lebensmittel in vereinfachter Form erfassen um die Online-Verwaltung der Lebensmittel zu füllen.
+4. **Benutzeroberfläche**: Das System sollte alle Screengrößen unterstützen.
 
 **Mögliche Herausforderungen**:
 
-1. **Genauigkeit der Lebensmittelerkennung**: Die Genauigkeit der Erkennung bei der Identifizierung von Lebensmitteln im Kühlschrank ist entscheidend für den Erfolg des Projekts. Dies kann in etwa durch einen Barcode-Scanner, einer passenden AR-Software oder möglichen IoT-Devices realisiert werden.
-2. **Datenquellen und Rezeptdatenbank**: Die Anwendung benötigt Zugriff auf eine umfassende Rezeptdatenbank und Lebensmittelinformationen, um genaue Rezeptvorschläge zu erstellen.
+1. **Korrekte Lebensmittelerkennung**: Die korrekte Erkennung bei der Identifizierung von Lebensmitteln im Kühlschrank ist entscheidend für den Erfolg des Projekts.
+2. **Art der Lebensmittelerkennung:** Die Lebensmittelerkennung kann etwa durch einen Barcode-Scanner, einer passenden AR-Software oder möglichen IoT-Devices realisiert werden.
 3. **Benutzerfreundlichkeit**: Die Anwendung muss einfach und benutzerfreundlich gestaltet sein, um eine breite Akzeptanz zu erreichen und einen intuitiven Umgang zu ermöglichen.
-4. **Korrektheit der Daten**: Die Anwendung sollte eine Korrektheit der angegebenen Daten und Rezepte sicherstellen.
+4. **Korrektheit der Daten**: Die Anwendung sollte eine Korrektheit der angegebenen Daten sicherstellen.
 
 **Ressourcen**:
 
-Die Projektidee klingt vielversprechend und könnte die Art und Weise, wie Menschen Rezepte verwalten, Einkäufe planen und Lebensmittel verschwenden, erheblich verbessern. Die Umsetzung erfordert jedoch eine sorgfältige Planung und Entwicklung, um die oben genannten Herausforderungen zu bewältigen und eine erfolgreiche Anwendung/Website zu schaffen.
+Die Projektidee klingt vielversprechend und könnte die Art und Weise, wie Menschen ihre Lebensmittel verwalten und Einkäufe planen erheblich verbessern. Die Umsetzung erfordert jedoch eine sorgfältige Planung und Entwicklung, um die oben genannten Herausforderungen zu bewältigen und eine erfolgreiche Anwendung/Website zu schaffen.
