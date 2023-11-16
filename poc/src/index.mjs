@@ -15,8 +15,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-function writeUserData(userId, name, email) {
+
+
+function generateUserId() {
+  const timestamp = new Date().getTime();
+  const randomChars = Math.random().toString(36).substring(7);
+  return `${timestamp}-${randomChars}`;
+}
+
+function writeUserData(name, email) {
     const db = getDatabase();
+    const userId = generateUserId();
     const reference = ref(db, 'users/' + userId);
 
     set(reference, {
@@ -25,4 +34,4 @@ function writeUserData(userId, name, email) {
     });
 }
 
-writeUserData("123","name", "email");
+writeUserData("nam22e", "email");
