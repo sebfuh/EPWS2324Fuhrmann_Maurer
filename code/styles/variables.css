@@ -1,0 +1,43 @@
+
+:root {
+    --base-size: 1rem;
+
+    /* Sizes */
+    --xs: calc(0.5 * var(--base-size));
+    --s: calc(1 * var(--base-size));
+    --m: calc(1.5 * var(--base-size));
+    --l: calc(2 * var(--base-size));
+    --xl: calc(3 * var(--base-size));
+    --xxl: calc(4 * var(--base-size));
+    --xxxl: calc(5 * var(--base-size));
+    --max-width-content: calc(60 * var(--s));
+
+    /* Colors */
+    --primary: #000;
+    --primary-lighter: #343434;
+    --secondary: #fff;
+    --accent: #69F3E9;
+    --accent-darker: #4cc0b8;
+    --darkest: #1D4745;
+    --dark: #2D706F;
+    --lighterdark: #3D9993;    
+
+    /* Font Family */
+    --font-family-sans: "Helvetica", sans-serif;
+    --font-family-serif: "IBM Plex Serif", serif;
+
+    /* Spacing */
+    --spacing-padding: 110px;
+    --spacing-margin-large: 100px;
+    --spacing-margin-medium: 20px;
+
+    /* Font Sizes */
+    --font-size-base: var(--s);
+    --font-size-heading1: var(--xl);
+    --font-size-heading2: var(--m);
+    --font-size-paragraph: var(--s);
+
+    /* Font Weights */
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+}
