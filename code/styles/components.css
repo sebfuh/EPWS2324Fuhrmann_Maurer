@@ -7,6 +7,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
 }
 
 #logo-header {
@@ -30,7 +31,7 @@ nav li {
 
 nav a {
     text-decoration: none;
-    color: #fff;
+    color: var(--darkest);
 }
 
 /* Media Query für kleinere Geräte */

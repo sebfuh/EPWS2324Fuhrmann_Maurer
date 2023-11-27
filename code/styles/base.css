@@ -2,7 +2,8 @@ html,
 body {
     font-family: var(--font-family-sans);
     font-size: var(--font-size-base);
-    background-color: #E8E5E5;
+    margin: var(--xs);
+
 }
 
 nav a {
@@ -47,6 +48,7 @@ p {
     font-size: var(--font-size-paragraph);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+    max-width: var(--max-width-content);
 }
 
 figure {
