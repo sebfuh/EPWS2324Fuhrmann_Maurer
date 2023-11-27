@@ -9,9 +9,8 @@ header {
     align-items: center;
 }
 
-#logo {
-    width: auto;
-    height: auto;
+#logo-header {
+    width: 500px;
 }
 
 nav {
@@ -34,32 +33,124 @@ nav a {
     color: #fff;
 }
 
+/* Media Query für kleinere Geräte */
+@media only screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    #logo {
+        margin-bottom: 10px;
+    }
+
+    nav {
+        margin-top: 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
 
 /* Liste (Inventar)
 ############################################################################ */
 
-
 .container {
     max-width: 600px;
-    margin: 50px auto;
-    text-align: center;
+    margin: var(--xxl);
+    text-align: left;
+}
+
+.container h1 {
+    text-align: left;
 }
 
 .scroll-container {
-    max-height: 200px; /* Setze die gewünschte maximale Höhe für die Scrollbar */
+    max-height: 600px; /* gewünschte maximale Höhe für die Scrollbar */
     overflow: auto;
 }
 
 .meine-liste {
     list-style-type: none;
     padding: 0;
-    margin: 0; /* Setze den äußeren Rand der Liste auf 0, um unnötige Lücken zu vermeiden */
+    margin: 0; 
 }
 
 .meine-liste li {
-    background-color: var(--lighterdark);
-    color: var(--secondary);
+    background-color: var(--secondary-darker);
+    color: var(--darkest);
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
+    max-width: 600px;
 }
+
+
+/* Footer
+############################################################################ 
+
+footer {
+    background-color: var(--darkest); 
+    color: var(--secondary); 
+    padding: var(--xxs); 
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content-left {
+    display: flex;
+    align-items: center;
+}
+
+#footer-logo {
+    width: 100px; 
+}
+
+.footer-content-right {
+    display: flex;
+}
+
+.footer-content-right a {
+    color: var(--secondary);
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+/* Media Query für kleinere Geräte 
+@media only screen and (max-width: 600px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-content-left, .footer-content-right {
+        margin-bottom: 15px;
+    }
+
+    #logo {
+        margin-right: 0;
+    }
+
+    .footer-content-right a {
+        margin-right: 0;
+    }
+}
+*/
