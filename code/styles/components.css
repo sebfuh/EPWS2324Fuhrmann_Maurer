@@ -1,0 +1,65 @@
+/* Navbar (Main Navigation)
+############################################################################ */
+
+header {
+    background-color: var(--accent-darker);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    width: auto;
+    height: auto;
+}
+
+nav {
+    display: flex;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-right: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
+/* Liste (Inventar)
+############################################################################ */
+
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.scroll-container {
+    max-height: 200px; /* Setze die gewünschte maximale Höhe für die Scrollbar */
+    overflow: auto;
+}
+
+.meine-liste {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Setze den äußeren Rand der Liste auf 0, um unnötige Lücken zu vermeiden */
+}
+
+.meine-liste li {
+    background-color: var(--lighterdark);
+    color: var(--secondary);
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
