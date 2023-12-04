@@ -1,23 +1,25 @@
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(3, 4); // RX, TX
- 
-void setup()
-{
-  Serial.begin(9600);  
-  mySerial.begin(9600); // set the data rate for the SoftwareSerial port
-}
- 
-void loop()
-{
-  if (mySerial.available()) // Check if there is Incoming Data in the Serial Buffer.
-  {
-    while (mySerial.available()) // Keep reading Byte by Byte from the Buffer till the Buffer is empty
-    {
-      char input = mySerial.read(); // Read 1 Byte of data and store it in a character variable
-      Serial.print(input); // Print the Byte
-      delay(5); // A small delay
-    }
-    Serial.println();
-  }
+
+// Konfiguration des Barcode-Scanners
+const int scannerTxPin = 17;  // TX-Pin des Barcode-Scanners
+const int scannerRxPin = 16;  // RX-Pin des Barcode-Scanners
+SoftwareSerial scannerSerial(scannerTxPin, scannerRxPin);
+
+void setup() {
+  // Initialisiere die serielle Kommunikation mit dem PC
+  Serial.begin(115200);
+
+  // Initialisiere die serielle Kommunikation mit dem Barcode-Scanner
+  scannerSerial.begin(9600);
 }
 
+void loop() {
+  // Überprüfe, ob Daten vom Barcode-Scanner verfügbar sind
+  if (scannerSerial.available() > 0) {
+    // Lese die empfangenen Daten vom Barcode-Scanner
+    String barcodeData = scannerSerial.readStringUntil('\n');
+    
+    // Gib den Barcode im Serial Monitor aus
+    Serial.println("Barcode: " + barcodeData);
+  }
+}
