@@ -52,6 +52,8 @@ Quelle: https://firebase.google.com/?hl=de&authuser=0
 
 ## Architekturmodell
 
+<img width="520" alt="Architekturmodell" src="https://github.com/sebfuh/EPWS2324Fuhrmann_Maurer/assets/92530724/0c417b01-3a0f-4e40-b190-569ddf3b2973">
+
 
 ## Style Prototype
 Der in Figma angefertigte Design Prototype kann unter folgenden Links abgerufen werden:
