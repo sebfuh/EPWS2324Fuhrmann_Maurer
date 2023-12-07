@@ -1,5 +1,7 @@
 # EPWS2324Fuhrmann_Maurer
 
+![logo](footage/snacktrack-logo-ganz-light.svg)
+
 
 ## Projektkommunikation und Fortführung von Angelina Maurer und Sebastian Fuhrmann über Notion:
 
