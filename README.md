@@ -54,7 +54,7 @@ Quelle: https://firebase.google.com/?hl=de&authuser=0
 
 
 ## Style Prototype
-Der in Figma angertigte Design Prototype kann unter folgenden Links abgerufen werden:
+Der in Figma angefertigte Design Prototype kann unter folgenden Links abgerufen werden:
     - Desktop Version: https://www.figma.com/proto/MUbH2I6k6Payi9Em3XGpp0/snackTrack?page-id=0%3A1&type=design&node-id=3-538&viewport=-616%2C-115%2C0.51&t=qWLuklvVaLPSPSLs-1&scaling=scale-down&starting-point-node-id=3%3A538&mode=design
     - Mobile Version: https://www.figma.com/proto/MUbH2I6k6Payi9Em3XGpp0/snackTrack?page-id=88%3A48&type=design&node-id=88-53&viewport=-10%2C-45%2C1.49&t=ypoM6CpmxFAoCmdx-1&scaling=scale-down&starting-point-node-id=88%3A49&mode=design
 
