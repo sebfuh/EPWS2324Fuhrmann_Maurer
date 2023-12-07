@@ -5,8 +5,62 @@
 
 link: https://modern-oatmeal-3af.notion.site/Entwicklungsprojekt-237c60b22ae0411383fa90e491e709b3?pvs=4
 
+## Projektrisiken 
+
+1. **Technologische Risiken:**
+    - **Hardwarefehler:** Probleme mit der Scanner-Hardware könnten auftreten, was zu Ausfällen oder ungenauen Scans führt.
+    - **Kompatibilitätsprobleme:** Schwierigkeiten bei der Integration des Scanners mit anderen Systemen oder Geräten in der Umgebung.
+2. **Datenschutz und Sicherheit:**
+    - **Datenlecks:** Die gesammelten Informationen könnten durch unsachgemäße Sicherheitsmaßnahmen gefährdet werden.
+    - **Unbefugter Zugriff:** Risiken in Bezug auf den Zugriff auf die Datenbank und die Sicherheit der gespeicherten Informationen.
+3. **Regulatorische Risiken:**
+    - **Compliance-Anforderungen:** Das Projekt muss möglicherweise verschiedenen gesetzlichen Vorschriften und branchenspezifischen Standards entsprechen, insbesondere im Bereich Lebensmittelsicherheit und Datenschutz.
+4. **Benutzerakzeptanz:**
+    - **Schulungsbedarf:** Benutzer müssen möglicherweise geschult werden, um den Scanner effektiv zu nutzen.
+    - **Benutzerfreundlichkeit:** Wenn die Benutzeroberfläche nicht intuitiv ist, könnte dies zu Akzeptanzproblemen führen.
+5. **Projektmanagement:**
+    - **Verzögerungen:** Unvorhergesehene Probleme könnten zu Verzögerungen bei der Projektumsetzung führen.
+    - **Budgetüberschreitungen:** Die Kosten könnten höher sein als ursprünglich geplant.
+6. **Lieferanten- und Beschaffungsrisiken:**
+    - **Lieferantenprobleme:** Verzögerungen oder Qualitätsprobleme bei den Hardwarekomponenten könnten auftreten.
+    - **Preisschwankungen:** Kosten für Hardwarekomponenten könnten steigen, was das Budget beeinträchtigen könnte.
+7. **Änderungsmanagement:**
+    - **Anforderungsänderungen:** Unvorhergesehene Änderungen in den Anforderungen könnten den Entwicklungsprozess beeinflussen.
+    - **Ungenaue Spezifikationen:** Wenn die Anforderungen nicht klar definiert sind, könnte dies zu Missverständnissen und Fehlern führen.
+8. **Umgebungsbedingte Risiken:**
+    - **Umwelteinflüsse:** Der Scanner könnte durch Umweltbedingungen wie Temperaturschwankungen oder Feuchtigkeit beeinträchtigt werden
+
+
+## Datenbank
+Firebase bietet eine Vielzahl von Funktionen, die es zu einem attraktiven Backend-as-a-Service (BaaS) und Mobile-Backend-as-a-Service (MBaaS) machen. Hier sind einige Vorteile von Firebase im Vergleich zu anderen Anbietern:
+
+1. **Einfache Integration:** Firebase bietet eine nahtlose Integration in verschiedene Plattformen, einschließlich iOS, Android, Web und Unity. Die SDKs sind gut dokumentiert und erleichtern die Implementierung von Funktionen in verschiedenen Anwendungen.
+2. **Echtzeitdatenbank (Realtime Database):** Firebase bietet eine Echtzeitdatenbank, die in Echtzeit synchronisiert wird. Dadurch können Benutzer sofortige Updates erhalten, ohne die Seite aktualisieren zu müssen. Dies ist besonders nützlich für Anwendungen, die Echtzeitkollaboration oder Messaging benötigen.
+3. **Authentifizierung:** Firebase bietet robuste Authentifizierungsdienste, die verschiedene Authentifizierungsmethoden unterstützen, einschließlich E-Mail/Passwort, soziale Anmeldungen (Google, Facebook, Twitter), Telefonnummer und mehr. Dies macht die Benutzerverwaltung einfach und sicher.
+4. **Cloud Firestore:** Firebase bietet neben der Echtzeitdatenbank auch Cloud Firestore, eine NoSQL-Datenbank, die skalierbar und leistungsstark ist. Firestore ermöglicht komplexe Abfragen und unterstützt Echtzeit-Updates.
+5. **Cloud Functions:** Firebase ermöglicht das Schreiben von serverseitigem Code mithilfe von Cloud Functions. Dadurch können Sie benutzerdefinierte Logik implementieren, die in Reaktion auf bestimmte Ereignisse, wie das Hinzufügen eines neuen Datensatzes oder das Authentifizieren eines Benutzers, ausgelöst wird.
+6. **Hosting und Cloud Storage:** Firebase bietet Hosting-Services für Webanwendungen und Cloud Storage für die Speicherung von Dateien. Die Integration ist einfach, und Sie können problemlos statische und dynamische Inhalte hosten.
+7. **Analytics und Crash Reporting:** Firebase bietet integrierte Analysetools, mit denen Sie das Nutzerverhalten verstehen und die Leistung Ihrer Anwendung überwachen können. Darüber hinaus gibt es Funktionen für das Crash-Reporting, um Fehler schnell zu identifizieren und zu beheben.
+8. **Push-Benachrichtigungen:** Firebase unterstützt das Senden von Push-Benachrichtigungen an iOS- und Android-Geräte, was für Benutzerbindung und Benachrichtigungen in Echtzeit wichtig ist.
+9. **Automatisches Skalieren:** Firebase skaliert automatisch, um den Anforderungen Ihrer Anwendung gerecht zu werden. Dies ermöglicht eine einfache Skalierbarkeit, ohne dass Sie sich um die Infrastruktur kümmern müssen.
+10. **Kostenloses Nutzungskontingent:** Firebase bietet ein großzügiges kostenloses Nutzungskontingent, was besonders für kleinere Projekte oder Entwickler mit begrenztem Budget attraktiv ist.
+
+Quelle: https://firebase.google.com/?hl=de&authuser=0
+
+
+## Architekturmodell
+
+
+## Style Prototype
+Der in Figma angertigte Design Prototype kann unter folgenden Links abgerufen werden:
+    - Desktop Version: https://www.figma.com/proto/MUbH2I6k6Payi9Em3XGpp0/snackTrack?page-id=0%3A1&type=design&node-id=3-538&viewport=-616%2C-115%2C0.51&t=qWLuklvVaLPSPSLs-1&scaling=scale-down&starting-point-node-id=3%3A538&mode=design
+    - Mobile Version: https://www.figma.com/proto/MUbH2I6k6Payi9Em3XGpp0/snackTrack?page-id=88%3A48&type=design&node-id=88-53&viewport=-10%2C-45%2C1.49&t=ypoM6CpmxFAoCmdx-1&scaling=scale-down&starting-point-node-id=88%3A49&mode=design
+
+![designPrototypeMockup](footage/design-prototype-mockup.png)
+
+
 ## Styleguide
-![styleguide](Artefakte/styleguide.svg)
+![styleguide](footage/styleguide.svg)
 
 
 
