@@ -52,7 +52,7 @@ Quelle: https://firebase.google.com/?hl=de&authuser=0
 
 ## Architekturmodell
 
-<img width="535" alt="Architekturmodell" src="https://github.com/sebfuh/EPWS2324Fuhrmann_Maurer/assets/92530724/11a3ae56-1dd9-4242-9479-3137f3364be9">
+<img width="520" alt="Architekturmodell" src="https://github.com/sebfuh/EPWS2324Fuhrmann_Maurer/assets/92530724/0c417b01-3a0f-4e40-b190-569ddf3b2973">
 
 
 ## Style Prototype
