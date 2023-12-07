@@ -66,7 +66,7 @@ Der in Figma angertigte Design Prototype kann unter folgenden Links abgerufen we
 
 
 
-## Artefakte 1.Audit:
+## Artefakte 1. Audit (Ordner "Artefakte"):
 - Projektplan
 - Stakeholder
 - Persona 
