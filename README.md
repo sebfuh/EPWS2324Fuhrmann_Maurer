@@ -3,7 +3,7 @@
 ![logo](footage/snacktrack-logo-ganz-light.svg)
 
 
-## Projektkommunikation und Fortführung von Angelina Maurer und Sebastian Fuhrmann über Notion:
+### Projektkommunikation und Fortführung von Angelina Maurer und Sebastian Fuhrmann über Notion:
 
 link: https://modern-oatmeal-3af.notion.site/Entwicklungsprojekt-237c60b22ae0411383fa90e491e709b3?pvs=4
 
