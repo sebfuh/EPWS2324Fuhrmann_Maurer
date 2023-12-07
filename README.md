@@ -5,6 +5,11 @@
 
 link: https://modern-oatmeal-3af.notion.site/Entwicklungsprojekt-237c60b22ae0411383fa90e491e709b3?pvs=4
 
+## Styleguide
+![styleguide](Artefakte/styleguide.svg)
+
+
+
 ## Artefakte 1.Audit:
 - Projektplan
 - Stakeholder
