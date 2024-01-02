@@ -75,10 +75,10 @@ void setup(){
 }
 
 
-oid loop(){
+void loop(){
 
   if (scannerSerial.available() > 0) {
-    String barcodeData = scannerSerial.readStringUntil('\n');
+    String barcodeData = scannerSerial.readStringUntil('\r');
 
     Serial.println(barcodeData); 
 
