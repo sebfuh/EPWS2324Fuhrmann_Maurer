@@ -3,6 +3,8 @@
 #include <Firebase_ESP_Client.h>
 #include <SoftwareSerial.h>
 
+
+
 #include "addons/TokenHelper.h"
 #include "addons/RTDBHelper.h"
 
@@ -24,13 +26,14 @@ SoftwareSerial scannerSerial(scannerTxPin, scannerRxPin);
 const int ledPinGreen = 22; 
 const int ledPinRed = 33;
 
+// SWITCH
+const int switchP = 14;
 
-//Define Firebase Data object
+
+//Firebase
 FirebaseData fbdo;
-
 FirebaseAuth auth;
 FirebaseConfig config;
-
 unsigned long sendDataPrevMillis = 0;
 bool signupOK = false;
 
@@ -70,6 +73,9 @@ void setup(){
   pinMode(ledPinGreen, OUTPUT);
   pinMode(ledPinRed, OUTPUT);
 
+  //SWITCH
+  pinMode(switchP, INPUT_PULLUP);
+
   // Barcode-Scanner
   scannerSerial.begin(9600);
 }
@@ -77,23 +83,22 @@ void setup(){
 
 void loop(){
 
+ int switchState = digitalRead(switchP);
+
+ if (switchState == HIGH){
+
   if (scannerSerial.available() > 0) {
     String barcodeData = scannerSerial.readStringUntil('\r');
-
-    Serial.println(barcodeData); 
-
-    Serial.println("Barcode: " + barcodeData);
 
     if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)){
       sendDataPrevMillis = millis();
       
-    
-      // Write on the database path test/int
-      if (Firebase.RTDB.setString(&fbdo, "test/int", barcodeData)){
+      // Write on the database path test/barcodes
+      if (Firebase.RTDB.push(&fbdo, "test/barcodes/", barcodeData)){
         Serial.println("PASSED");
+        Serial.println("Barcode: " + barcodeData);
         Serial.println("PATH: " + fbdo.dataPath());
         Serial.println("TYPE: " + fbdo.dataType());
-        Serial.println("Barcode: " + barcodeData);
         digitalWrite(ledPinGreen, HIGH);
         delay(2000);
         digitalWrite(ledPinGreen, LOW);
@@ -108,4 +113,9 @@ void loop(){
         
     }
   }
+}
+else {
+  Serial.println( "LOW");
+  delay(6000);
+}
 }
