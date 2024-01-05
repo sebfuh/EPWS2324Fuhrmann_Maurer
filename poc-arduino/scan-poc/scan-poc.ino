@@ -1,18 +1,18 @@
 #include <Arduino.h>
 #include <WiFi.h>
-#include <Firebase_ESP_Client.h>
-#include <SoftwareSerial.h>
 
+#include <SoftwareSerial.h> //ESPSoftwareSerial
+#include <FirebaseESP32.h> //Firebase ESP32 Client
 
 
 #include "addons/TokenHelper.h"
 #include "addons/RTDBHelper.h"
 
 
-#define WIFI_SSID "Hier ist alles super"
-#define WIFI_PASSWORD "Wlan-FBI2022"
-// const char *WIFI_SSID = "moxd-lab-test-net";          
-//const char *WIFI_PASS = "!Moxd3209#";
+//#define WIFI_SSID "Hier ist alles super"
+//#define WIFI_PASSWORD "Wlan-FBI2022"
+#define WIFI_SSID "moxd-lab-test-net"          
+#define WIFI_PASSWORD "!Moxd3209#"
 
 #define API_KEY "AIzaSyAFjj-U3Ylj5daf__Zzq3wllb4GiRF3kio"
 #define DATABASE_URL "https://ep-poc-f1041-default-rtdb.firebaseio.com/" 
@@ -112,10 +112,35 @@ void loop(){
         }
         
     }
+ 
+ }
+ }
+ if (switchState == LOW){
+  if (scannerSerial.available() > 0) {
+          String barcodeDataDelete = scannerSerial.readStringUntil('\r');
+          Serial.println("Barcode-to-delete: " + barcodeDataDelete);
+          deleteBarcodeFromFirebase(barcodeDataDelete);
+        }
+}
+
+}
+
+
+void deleteBarcodeFromFirebase(String barcode) {
+  String path = "test/barcodes/" + barcode;
+
+  if (Firebase.RTDB.set(&fbdo, path, "null")) {
+    Serial.println("Barcode value set null successfully"); 
+    digitalWrite(ledPinGreen, HIGH);
+    delay(2000);
+    digitalWrite(ledPinGreen, LOW);
+  } else {
+    Serial.println("Barcode value set null NOT successfully");
+    Serial.println(fbdo.errorReason());
+    digitalWrite(ledPinRed, HIGH);
+    delay(2000);
+    digitalWrite(ledPinRed, LOW);
   }
 }
-else {
-  Serial.println( "LOW");
-  delay(6000);
-}
-}
+
+
