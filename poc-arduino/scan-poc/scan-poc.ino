@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <WiFi.h>
-
+//#include <Firebase_ESP_Client.h>
 #include <SoftwareSerial.h> //ESPSoftwareSerial
 #include <FirebaseESP32.h> //Firebase ESP32 Client
 
@@ -42,10 +42,10 @@ void setup(){
   Serial.begin(115200);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to Wi-Fi");
-  while (WiFi.status() != WL_CONNECTED){
-    Serial.print(".");
-    delay(300);
-  }
+    while (WiFi.status() != WL_CONNECTED){
+      Serial.print(".");
+      delay(300);
+    }
   Serial.println();
   Serial.print("Connected with IP: ");
   Serial.println(WiFi.localIP());
@@ -56,13 +56,13 @@ void setup(){
   config.database_url = DATABASE_URL;
 
   /* Sign up */
-  if (Firebase.signUp(&config, &auth, "", "")){
-    Serial.println("ok");
-    signupOK = true;
-  }
-  else{
-    Serial.printf("%s\n", config.signer.signupError.message.c_str());
-  }
+    if (Firebase.signUp(&config, &auth, "", "")){
+      Serial.println("ok");
+      signupOK = true;
+    }
+      else{
+        Serial.printf("%s\n", config.signer.signupError.message.c_str());
+      }
 
   /* Assign the callback function for the long running token generation task */
   config.token_status_callback = tokenStatusCallback; 
@@ -140,7 +140,7 @@ void deleteBarcodeFromFirebase(String barcode) {
     digitalWrite(ledPinRed, HIGH);
     delay(2000);
     digitalWrite(ledPinRed, LOW);
-  }
+    }
 }
 
 
