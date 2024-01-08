@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <WiFi.h>
-//#include <Firebase_ESP_Client.h>
+#include <Firebase_ESP_Client.h>
 #include <SoftwareSerial.h> //ESPSoftwareSerial
 #include <FirebaseESP32.h> //Firebase ESP32 Client
 
@@ -9,10 +9,10 @@
 #include "addons/RTDBHelper.h"
 
 
-//#define WIFI_SSID "Hier ist alles super"
-//#define WIFI_PASSWORD "Wlan-FBI2022"
-#define WIFI_SSID "moxd-lab-test-net"          
-#define WIFI_PASSWORD "!Moxd3209#"
+#define WIFI_SSID "Hier ist alles super"
+#define WIFI_PASSWORD "Wlan-FBI2022"
+//#define WIFI_SSID "moxd-lab-test-net"          
+//#define WIFI_PASSWORD "!Moxd3209#"
 
 #define API_KEY "AIzaSyAFjj-U3Ylj5daf__Zzq3wllb4GiRF3kio"
 #define DATABASE_URL "https://ep-poc-f1041-default-rtdb.firebaseio.com/" 
@@ -135,11 +135,11 @@ void deleteBarcodeFromFirebase(String barcode) {
     delay(2000);
     digitalWrite(ledPinGreen, LOW);
   } else {
-    Serial.println("Barcode value set null NOT successfully");
-    Serial.println(fbdo.errorReason());
-    digitalWrite(ledPinRed, HIGH);
-    delay(2000);
-    digitalWrite(ledPinRed, LOW);
+      Serial.println("Barcode value set null NOT successfully");
+      Serial.println(fbdo.errorReason());
+      digitalWrite(ledPinRed, HIGH);
+      delay(2000);
+      digitalWrite(ledPinRed, LOW);
     }
 }
 
