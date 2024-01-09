@@ -2,6 +2,7 @@ const admin = require('firebase-admin');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');  // Füge Axios für HTTP-Anfragen hinzu
 const app = express();
 
 var serviceAccount = require('../admin.json');
@@ -11,18 +12,38 @@ admin.initializeApp({
     authDomain: "ep-poc-f1041.firebaseapp.com",
 });
 
-// Referenz auf deine Datenbank
+// Referenz auf deine Firebase Realtime Database
 const db = admin.database();
-const userRef = db.ref('test/barcodes');
+const userRef = db.ref('inventar');
+const OPEN_FOOD_FACTS_API_URL = 'https://world.openfoodfacts.org/api/v0/product/';
 
-const getBarcodes = (req, res) => {
-    userRef.once('value', function (snap) {
-        const data = snap.val();
-        console.log('Inhalte der Firebase Realtime Database:', data);
+
+const getBarcodes = async (req, res) => {
+    try {
+        // Daten aus Firebase abrufen
+        const snapshot = await userRef.once('value');
+        const barcodes = Object.keys(snapshot.val());
+
+        // Informationen für jeden Barcode von der Open Food Facts API abrufen
+        const productInfoPromises = barcodes.map(async (barcode) => {
+            const response = await axios.get(`${OPEN_FOOD_FACTS_API_URL}${barcode}.json`);
+            const product = response.data.product;
+            const barcodeValue = snapshot.val()[barcode];
+            // Nur Elemente mit barcodeValue > 0 berücksichtigen
+            if (barcodeValue > 0) {
+                return { barcode, product, barcodeValue };
+            } else {
+                return null;
+            }
+        });
+
+        // Warten, bis alle API-Anfragen abgeschlossen sind und filtere gleichzeitig null-Elemente heraus
+const productInfos = (await Promise.all(productInfoPromises)).filter(info => info !== null);
+
 
         // HTML-Liste dynamisch erstellen
         const htmlList = '<ul>' +
-            Object.keys(data).map(key => `<li>${key}: ${data[key]}</li>`).join('') +
+        productInfos.map(info => `<li>Anzahl: ${info.barcodeValue}, ${info.barcode}: ${info.product.product_name}</li>`).join('') +
             '</ul>';
 
         // Pfad zur HTML-Datei
@@ -41,7 +62,10 @@ const getBarcodes = (req, res) => {
             // HTML als Antwort senden
             res.status(200).send(finalHtml);
         });
-    });
+    } catch (error) {
+        console.error('Fehler beim Abrufen der Barcodes:', error);
+        res.status(500).send('Interner Serverfehler');
+    }
 };
 
 // Beispielroute in Express
