@@ -2,7 +2,7 @@ const admin = require('firebase-admin');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios');  // Füge Axios für HTTP-Anfragen hinzu
+const axios = require('axios');  
 const app = express();
 
 var serviceAccount = require('../admin.json');
@@ -12,7 +12,6 @@ admin.initializeApp({
     authDomain: "ep-poc-f1041.firebaseapp.com",
 });
 
-// Referenz auf deine Firebase Realtime Database
 const db = admin.database();
 const userRef = db.ref('inventar');
 const OPEN_FOOD_FACTS_API_URL = 'https://world.openfoodfacts.org/api/v0/product/';
@@ -37,16 +36,12 @@ const getBarcodes = async (req, res) => {
             }
         });
 
-        // Warten, bis alle API-Anfragen abgeschlossen sind und filtere gleichzeitig null-Elemente heraus
-const productInfos = (await Promise.all(productInfoPromises)).filter(info => info !== null);
+        const productInfos = (await Promise.all(productInfoPromises)).filter(info => info !== null);
 
-
-        // HTML-Liste dynamisch erstellen
         const htmlList = '<ul>' +
         productInfos.map(info => `<li>Anzahl: ${info.barcodeValue}, ${info.barcode}: ${info.product.product_name}</li>`).join('') +
             '</ul>';
 
-        // Pfad zur HTML-Datei
         const htmlFilePath = path.join(__dirname, '../index.html');
 
         // HTML-Datei lesen und mit dynamisch erstellter Liste ersetzen
@@ -56,10 +51,8 @@ const productInfos = (await Promise.all(productInfoPromises)).filter(info => inf
                 return res.status(500).send('Interner Serverfehler');
             }
 
-            // Platzhalter ersetzen
             const finalHtml = htmlTemplate.replace('<!-- Inhalte werden hier dynamisch eingefügt -->', htmlList);
 
-            // HTML als Antwort senden
             res.status(200).send(finalHtml);
         });
     } catch (error) {
@@ -68,10 +61,9 @@ const productInfos = (await Promise.all(productInfoPromises)).filter(info => inf
     }
 };
 
-// Beispielroute in Express
-app.get('/barcodes', getBarcodes);
 
-const PORT = 3000; // Wähle einen geeigneten Port
+app.get('/barcodes', getBarcodes);
+const PORT = 3000; 
 app.listen(PORT, () => {
     console.log(`Server läuft auf http://localhost:${PORT}`);
 });
