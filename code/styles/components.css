@@ -61,9 +61,37 @@ nav a {
 }
 
 
-/* Liste (Inventar)
+/* Tabelle (Inventar)
 ############################################################################ */
 
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #6d1515;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Liste (Inventar)
+############################################################################ */
 .container {
     max-width: 600px;
     margin: var(--xxl);
