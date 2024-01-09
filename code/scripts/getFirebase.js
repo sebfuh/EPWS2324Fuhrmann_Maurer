@@ -15,7 +15,7 @@ admin.initializeApp({
 const db = admin.database();
 const userRef = db.ref('inventar');
 const OPEN_FOOD_FACTS_API_URL = 'https://world.openfoodfacts.org/api/v0/product/';
-
+app.use(express.static(path.join(__dirname, '../public')));
 
 const getBarcodes = async (req, res) => {
     try {
@@ -38,9 +38,19 @@ const getBarcodes = async (req, res) => {
 
         const productInfos = (await Promise.all(productInfoPromises)).filter(info => info !== null);
 
-        const htmlList = '<ul>' +
-        productInfos.map(info => `<li>Anzahl: ${info.barcodeValue}, ${info.barcode}: ${info.product.product_name}</li>`).join('') +
-            '</ul>';
+        const htmlList = '<table border="1">' +
+    '<thead>' +
+        '<tr>' +
+            '<th>Anzahl</th>' +
+            '<th>Barcode</th>' +
+            '<th>Produktname</th>' +
+        '</tr>' +
+    '</thead>' +
+    '<tbody>' +
+        productInfos.map(info => `<tr><td>${info.barcodeValue}</td><td>${info.barcode}</td><td>${info.product.product_name}</td></tr>`).join('') +
+    '</tbody>' +
+'</table>';
+
 
         const htmlFilePath = path.join(__dirname, '../index.html');
 
@@ -63,6 +73,8 @@ const getBarcodes = async (req, res) => {
 
 
 app.get('/barcodes', getBarcodes);
+
+
 const PORT = 3000; 
 app.listen(PORT, () => {
     console.log(`Server läuft auf http://localhost:${PORT}`);
