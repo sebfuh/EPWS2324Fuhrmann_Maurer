@@ -15,7 +15,7 @@ admin.initializeApp({
 const db = admin.database();
 const userRef = db.ref('inventar');
 const OPEN_FOOD_FACTS_API_URL = 'https://world.openfoodfacts.org/api/v0/product/';
-app.use(express.static(path.join(__dirname, '../styles')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 const getBarcodes = async (req, res) => {
     try {
@@ -39,15 +39,17 @@ const getBarcodes = async (req, res) => {
         const productInfos = (await Promise.all(productInfoPromises)).filter(info => info !== null);
 
         const htmlList = '<table border="1">' +
-            '<thead>' +
-                '<tr>' +
-                    '<th>Anzahl</th>' +
-                    '<th>Barcode</th>' +
-                    '<th>Produktname</th>' +
-                '</tr>' +
-            '</thead>' +
+            '<caption>Inventar</caption>' +
+                '<thead>' +
+                    '<tr>' +
+                        '<th>Produktfoto</th>' +
+                        '<th>Anzahl</th>' +
+                        '<th>Barcode</th>' +
+                        '<th>Produktname</th>' +                    
+                    '</tr>' +
+                '</thead>' +
             '<tbody>' +
-                productInfos.map(info => `<tr><td>${info.barcodeValue}</td><td>${info.barcode}</td><td>${info.product.product_name}</td></tr>`).join('') +
+                productInfos.map(info => `<tr><td><img src="${info.product.image_url}" alt="Produktfoto"></td><td>${info.barcodeValue}</td><td>${info.barcode}</td><td>${info.product.product_name}</td></tr>`).join('') +
             '</tbody>' +
         '</table>';
 
