@@ -36,7 +36,7 @@ const getBarcodes = async (req, res) => {
                     if (product && product.product_name) {
                         return { barcode, product, barcodeValue };
                     } else {
-                        return { barcode, product: { product_name: 'Nicht gefunden' }, barcodeValue };
+                        return { barcode, product: { product_name: barcode }, barcodeValue };
                     }
                 } else {
                     return null;
@@ -54,12 +54,11 @@ const getBarcodes = async (req, res) => {
                 '<thead>' +
                     '<tr>' +
                         '<th>Anzahl</th>' +
-                        '<th>Barcode</th>' +
                         '<th>Produktname</th>' +
                     '</tr>' +
                 '</thead>' +
             '<tbody>' +
-                productInfos.map(info => `<tr><td>${info.barcodeValue}</td><td>${info.barcode}</td><td>${info.product.product_name}</td></tr>`).join('') +
+                productInfos.map(info => `<tr><td>${info.barcodeValue}</td><td>${info.product.product_name}</td></tr>`).join('') +
             '</tbody>' +
         '</table>';
 
@@ -77,8 +76,8 @@ const getBarcodes = async (req, res) => {
             res.status(200).send(finalHtml);
         });
     } catch (error) {
-        console.error('Fehler beim Abrufen der Barcodes:', error);
-        res.status(500).send('Interner Serverfehler');
+       /*  console.error('Fehler beim Abrufen der Barcodes:', error);
+        res.status(500).send('Interner Serverfehler'); */
     }
 };
 
