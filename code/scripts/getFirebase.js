@@ -25,34 +25,43 @@ const getBarcodes = async (req, res) => {
 
         // Informationen für jeden Barcode von der Open Food Facts API abrufen
         const productInfoPromises = barcodes.map(async (barcode) => {
-            const response = await axios.get(`${OPEN_FOOD_FACTS_API_URL}${barcode}.json`);
-            const product = response.data.product;
-            const barcodeValue = snapshot.val()[barcode];
-            // Nur Elemente mit barcodeValue > 0 berücksichtigen
-            if (barcodeValue > 0) {
-                return { barcode, product, barcodeValue };
-            } else {
-                return null;
+            try {
+                const response = await axios.get(`${OPEN_FOOD_FACTS_API_URL}${barcode}.json`);
+                const product = response.data.product;
+                const barcodeValue = snapshot.val()[barcode];
+
+                // Nur Elemente mit barcodeValue > 0 berücksichtigen
+                if (barcodeValue > 0) {
+                    // Überprüfen, ob product und product_name vorhanden sind, bevor darauf zugegriffen wird
+                    if (product && product.product_name) {
+                        return { barcode, product, barcodeValue };
+                    } else {
+                        return { barcode, product: { product_name: 'Nicht gefunden' }, barcodeValue };
+                    }
+                } else {
+                    return null;
+                }
+            } catch (error) {
+                // Bei einem Fehler (z.B. Barcode nicht gefunden) Platzhalterinformation zurückgeben
+                return { barcode, product: { product_name: 'Nicht gefunden' }, barcodeValue };
             }
         });
 
-        const productInfos = (await Promise.all(productInfoPromises)).filter(info => info !== null);
+        const productInfos = await Promise.all(productInfoPromises);
 
         const htmlList = '<table border="1">' +
             '<caption>Inventar</caption>' +
                 '<thead>' +
                     '<tr>' +
-                        '<th>Produktfoto</th>' +
                         '<th>Anzahl</th>' +
                         '<th>Barcode</th>' +
-                        '<th>Produktname</th>' +                    
+                        '<th>Produktname</th>' +
                     '</tr>' +
                 '</thead>' +
             '<tbody>' +
-                productInfos.map(info => `<tr><td><img src="${info.product.image_url}" alt="Produktfoto"></td><td>${info.barcodeValue}</td><td>${info.barcode}</td><td>${info.product.product_name}</td></tr>`).join('') +
+                productInfos.map(info => `<tr><td>${info.barcodeValue}</td><td>${info.barcode}</td><td>${info.product.product_name}</td></tr>`).join('') +
             '</tbody>' +
         '</table>';
-
 
         const htmlFilePath = path.join(__dirname, '../index.html');
 
@@ -72,6 +81,8 @@ const getBarcodes = async (req, res) => {
         res.status(500).send('Interner Serverfehler');
     }
 };
+
+
 
 
 app.get('/barcodes', getBarcodes);
