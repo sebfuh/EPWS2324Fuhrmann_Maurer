@@ -3,9 +3,9 @@
 
 <img width="976" alt="snacktrack-logo-ganz-light@2x" src="https://github.com/sebfuh/EPWS2324Fuhrmann_Maurer/assets/116002806/dea6fbc1-ac0a-43fc-a63f-6b95ba2cec28">
 
+## Eine Ausführliche und strukturierte Sammlung der Projektergebnisse sind im Wiki des Repositorys zu finden 
 
-
-### Projektkommunikation und Fortführung von Angelina Maurer und Sebastian Fuhrmann über Notion:
+### Projektkommunikation von Angelina Maurer und Sebastian Fuhrmann über Notion:
 
 link: https://modern-oatmeal-3af.notion.site/Entwicklungsprojekt-237c60b22ae0411383fa90e491e709b3?pvs=4
 
