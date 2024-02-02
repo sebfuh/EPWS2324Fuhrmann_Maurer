@@ -13,7 +13,7 @@ admin.initializeApp({
 });
 
 const db = admin.database();
-const userRef = db.ref('inventar');
+const userRef = db.ref('/3C71BFCD8E7C/inventarUserOne');
 const OPEN_FOOD_FACTS_API_URL = 'https://world.openfoodfacts.org/api/v0/product/';
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -29,10 +29,7 @@ const getBarcodes = async (req, res) => {
                 const response = await axios.get(`${OPEN_FOOD_FACTS_API_URL}${barcode}.json`);
                 const product = response.data.product;
                 const barcodeValue = snapshot.val()[barcode];
-
-                // Nur Elemente mit barcodeValue > 0 berücksichtigen
                 if (barcodeValue > 0) {
-                    // Überprüfen, ob product und product_name vorhanden sind, bevor darauf zugegriffen wird
                     if (product && product.product_name) {
                         return { barcode, product, barcodeValue };
                     } else {
@@ -42,7 +39,6 @@ const getBarcodes = async (req, res) => {
                     return null;
                 }
             } catch (error) {
-                // Bei einem Fehler (z.B. Barcode nicht gefunden) Platzhalterinformation zurückgeben
                 return { barcode, product: { product_name: 'Nicht gefunden' }, barcodeValue };
             }
         });
@@ -76,8 +72,8 @@ const getBarcodes = async (req, res) => {
             res.status(200).send(finalHtml);
         });
     } catch (error) {
-       /*  console.error('Fehler beim Abrufen der Barcodes:', error);
-        res.status(500).send('Interner Serverfehler'); */
+         console.error('Fehler beim Abrufen der Barcodes:', error);
+        res.status(500).send('Interner Serverfehler'); 
     }
 };
 
