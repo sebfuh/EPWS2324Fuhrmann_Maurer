@@ -4,8 +4,13 @@
 #include "addons/RTDBHelper.h"
 #include "addons/TokenHelper.h"
 
+//#define WIFI_SSID "HUAWEI P20"
+//#define WIFI_PASSWORD "08150000"
 #define WIFI_SSID "Hier ist alles super"
 #define WIFI_PASSWORD "Wlan-FBI2022"
+//#define WIFI_SSID "moxd-lab-test-net"
+//#define WIFI_PASSWORD "!Moxd3209#"
+
 #define API_KEY "AIzaSyAFjj-U3Ylj5daf__Zzq3wllb4GiRF3kio"
 #define DATABASE_URL "https://ep-poc-f1041-default-rtdb.firebaseio.com/"
 
@@ -15,7 +20,8 @@ SoftwareSerial scannerSerial(scannerTxPin, scannerRxPin);
 
 const int ledPinGreen = 22;
 const int ledPinRed = 33;
-const int switchP = 14;
+const int switchS = 14;
+const int switchU = 15; 
 
 FirebaseData fbdo;
 FirebaseAuth auth;
@@ -23,8 +29,16 @@ FirebaseConfig config;
 unsigned long sendDataPrevMillis = 0;
 bool signupOK = false;
 
+
+
 void setup() {
   Serial.begin(115200);
+
+  // Initialisiere LEDs
+  pinMode(ledPinGreen, OUTPUT);
+  pinMode(ledPinRed, OUTPUT);
+
+  digitalWrite(ledPinRed, HIGH); 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to Wi-Fi");
   while (WiFi.status() != WL_CONNECTED) {
@@ -35,6 +49,7 @@ void setup() {
   Serial.print("Connected with IP: ");
   Serial.println(WiFi.localIP());
   Serial.println();
+  digitalWrite(ledPinRed, LOW);  
 
   config.api_key = API_KEY;
   config.database_url = DATABASE_URL;
@@ -50,22 +65,35 @@ void setup() {
   Firebase.begin(&config, &auth);
   Firebase.reconnectWiFi(true);
 
-  pinMode(ledPinGreen, OUTPUT);
-  pinMode(ledPinRed, OUTPUT);
-  pinMode(switchP, INPUT_PULLUP);
+
+
+
+  pinMode(switchS, INPUT_PULLUP);
+  pinMode(switchU, INPUT_PULLUP);
   scannerSerial.begin(9600);
 }
 
+
 void loop() {
-  int switchState = digitalRead(switchP);
+
+  int switchState = digitalRead(switchS);
+  int switchUser = digitalRead(switchU);
+  
+
 
   if (switchState == HIGH) {
     if (scannerSerial.available() > 0) {
       String barcodeData = scannerSerial.readStringUntil('\r');
       if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 1500 || sendDataPrevMillis == 0)) {
         sendDataPrevMillis = millis();
-        String databasePath = "inventar/" + barcodeData;
-        updateBarcodeCount(barcodeData);
+
+        String databasePath;
+        if (switchUser == HIGH) {
+          databasePath = "inventarUserOne/" + barcodeData;
+        } else {
+          databasePath = "inventarUserTwo/" + barcodeData;
+        }
+        updateBarcodeCount(barcodeData, databasePath);
       }
     }
   }
@@ -74,13 +102,22 @@ void loop() {
     if (scannerSerial.available() > 0) {
       String barcodeDataDelete = scannerSerial.readStringUntil('\r');
       Serial.println("Barcode-to-delete: " + barcodeDataDelete);
-      decreaseBarcodeCount(barcodeDataDelete);
+        String databasePath;
+      if (switchUser == HIGH) {
+        databasePath = "inventarUserOne/" + barcodeDataDelete;
+      } else {
+        databasePath = "inventarUserTwo/" + barcodeDataDelete;
+      }
+
+      decreaseBarcodeCount(barcodeDataDelete, databasePath);
+    }
     }
   }
-}
 
-void decreaseBarcodeCount(String barcode) {
-  String path = "inventar/" + barcode;
+
+//Functions -> scan Barcodes 
+void decreaseBarcodeCount(String barcode, String path) {
+ // String path = "inventar/" + barcode;
 
   if (Firebase.RTDB.getString(&fbdo, path.c_str())) {
     String currentValue = fbdo.stringData();
@@ -125,8 +162,8 @@ void decreaseBarcodeCount(String barcode) {
   }
 }
 
-void updateBarcodeCount(String barcode) {
-  String path = "inventar/" + barcode;
+void updateBarcodeCount(String barcode, String path) {
+  //String path = "inventar/" + barcode;
 
   if (Firebase.RTDB.getString(&fbdo, path.c_str())) {
     String currentValue = fbdo.stringData();
@@ -152,6 +189,7 @@ void updateBarcodeCount(String barcode) {
       if (Firebase.RTDB.setInt(&fbdo, path.c_str(), count)) {
         Serial.println("Anzahl des Barcodes aktualisiert: " + barcode);
         Serial.println("Neue Anzahl: " + String(count));
+        Serial.println(String(path));
         digitalWrite(ledPinGreen, HIGH);
         delay(2000);
         digitalWrite(ledPinGreen, LOW);
@@ -167,6 +205,7 @@ void updateBarcodeCount(String barcode) {
     if (Firebase.RTDB.setString(&fbdo, path.c_str(), "1")) {
       Serial.println("Barcode hinzugefügt: " + barcode);
       Serial.println("Anzahl: 1");
+      Serial.println(String(path));
       digitalWrite(ledPinGreen, HIGH);
       delay(2000);
       digitalWrite(ledPinGreen, LOW);
