@@ -3,6 +3,8 @@
 #include <SoftwareSerial.h>
 #include "addons/RTDBHelper.h"
 #include "addons/TokenHelper.h"
+#include <esp_system.h>
+#include <ArduinoJson.h>
 
 //#define WIFI_SSID "HUAWEI P20"
 //#define WIFI_PASSWORD "08150000"
@@ -12,7 +14,7 @@
 //#define WIFI_PASSWORD "!Moxd3209#"
 
 #define API_KEY "AIzaSyAFjj-U3Ylj5daf__Zzq3wllb4GiRF3kio"
-#define DATABASE_URL "https://ep-poc-f1041-default-rtdb.firebaseio.com/"
+#define DATABASE_URL "https://ep-poc-f1041-default-rtdb.firebaseio.com/" 
 
 const int scannerTxPin = 17;
 const int scannerRxPin = 16;
@@ -28,8 +30,8 @@ FirebaseAuth auth;
 FirebaseConfig config;
 unsigned long sendDataPrevMillis = 0;
 bool signupOK = false;
-
-
+String uniquePath;
+String uuid;
 
 void setup() {
   Serial.begin(115200);
@@ -65,21 +67,31 @@ void setup() {
   Firebase.begin(&config, &auth);
   Firebase.reconnectWiFi(true);
 
+  // Eindeutige UUID generieren
+  String uniquePath = generateUUID();
+  Serial.println(uniquePath);
 
-
+  // Überprüfen und Eindeutigen Pfad erstellen
+  if (!Firebase.RTDB.getString(&fbdo, uniquePath.c_str())) {
+    if (Firebase.RTDB.setString(&fbdo, uniquePath.c_str(), "initialValue")) {
+      Serial.println("Eindeutiger Pfad erstellt: " + uniquePath);
+    } else {
+      Serial.println("Fehler beim Erstellen des eindeutigen Pfads");
+      Serial.println(fbdo.errorReason());
+      while (1); // Halt das Programm an, wenn ein Fehler auftritt
+    }
+  }
 
   pinMode(switchS, INPUT_PULLUP);
   pinMode(switchU, INPUT_PULLUP);
   scannerSerial.begin(9600);
 }
 
-
 void loop() {
-
   int switchState = digitalRead(switchS);
   int switchUser = digitalRead(switchU);
-  
-
+  String uuid = generateUUID();
+ // Serial.println("Unique: " + uuid);
 
   if (switchState == HIGH) {
     if (scannerSerial.available() > 0) {
@@ -89,9 +101,9 @@ void loop() {
 
         String databasePath;
         if (switchUser == HIGH) {
-          databasePath = "inventarUserOne/" + barcodeData;
+          databasePath = uuid + "/inventarUserOne/" + barcodeData;
         } else {
-          databasePath = "inventarUserTwo/" + barcodeData;
+          databasePath = uuid + "/inventarUserTwo/" + barcodeData;
         }
         updateBarcodeCount(barcodeData, databasePath);
       }
@@ -102,17 +114,18 @@ void loop() {
     if (scannerSerial.available() > 0) {
       String barcodeDataDelete = scannerSerial.readStringUntil('\r');
       Serial.println("Barcode-to-delete: " + barcodeDataDelete);
-        String databasePath;
+      String databasePath;
       if (switchUser == HIGH) {
-        databasePath = "inventarUserOne/" + barcodeDataDelete;
+        databasePath = uniquePath + "/inventarUserOne/" + barcodeDataDelete;
       } else {
-        databasePath = "inventarUserTwo/" + barcodeDataDelete;
+        databasePath = uniquePath + "/inventarUserTwo/" + barcodeDataDelete;
       }
-
       decreaseBarcodeCount(barcodeDataDelete, databasePath);
     }
-    }
   }
+}
+
+
 
 
 //Functions -> scan Barcodes 
@@ -217,4 +230,14 @@ void updateBarcodeCount(String barcode, String path) {
       digitalWrite(ledPinRed, LOW);
     }
   }
+}
+
+String generateUUID() {
+  uint8_t mac[6];
+  esp_read_mac(mac, ESP_MAC_WIFI_STA);
+
+  char uuid[36];
+  sprintf(uuid, "%02X%02X%02X%02X%02X%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+
+  return String(uuid);
 }
