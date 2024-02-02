@@ -106,6 +106,6 @@ app.get('/inventar/:profile', (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Server läuft auf http://localhost:${PORT}`);
+    console.log(`Server läuft auf http://localhost:${PORT}/inventar/profile1`);
 });
 
