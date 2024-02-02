@@ -2,7 +2,7 @@ const admin = require('firebase-admin');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios');  
+const axios = require('axios');
 const app = express();
 
 var serviceAccount = require('../admin.json');
@@ -12,13 +12,34 @@ admin.initializeApp({
     authDomain: "ep-poc-f1041.firebaseapp.com",
 });
 
+
+
+
 const db = admin.database();
-const userRef = db.ref('/3C71BFCD8E7C/inventarUserOne');
+var userRef; // Deklariere userRef hier außerhalb der Funktion
+
+function selectProfile(selectedProfile) {
+    // Definiere Pfade für jedes Profil
+    var profilePaths = {
+        profile1: "/3C71BFCD8E7C/inventarUserOne",
+        profile2: "/3C71BFCD8E7C/inventarUserTwo"
+    };
+
+    // Holen Sie den ausgewählten Pfad für das ausgewählte Profil
+    userRef = db.ref(profilePaths[selectedProfile]);
+}
+
+
 const OPEN_FOOD_FACTS_API_URL = 'https://world.openfoodfacts.org/api/v0/product/';
 app.use(express.static(path.join(__dirname, '../public')));
 
 const getBarcodes = async (req, res) => {
     try {
+        // Stelle sicher, dass selectProfile aufgerufen wurde, um userRef zu setzen
+        if (!userRef) {
+            return res.status(400).send('Profile wurde nicht ausgewählt');
+        }
+
         // Daten aus Firebase abrufen
         const snapshot = await userRef.once('value');
         const barcodes = Object.keys(snapshot.val());
@@ -47,16 +68,16 @@ const getBarcodes = async (req, res) => {
 
         const htmlList = '<table border="1">' +
             '<caption>Inventar</caption>' +
-                '<thead>' +
-                    '<tr>' +
-                        '<th>Anzahl</th>' +
-                        '<th>Produktname</th>' +
-                    '</tr>' +
-                '</thead>' +
+            '<thead>' +
+            '<tr>' +
+            '<th>Anzahl</th>' +
+            '<th>Produktname</th>' +
+            '</tr>' +
+            '</thead>' +
             '<tbody>' +
-                productInfos.map(info => `<tr><td>${info.barcodeValue}</td><td>${info.product.product_name}</td></tr>`).join('') +
+            productInfos.map(info => `<tr><td>${info.barcodeValue}</td><td>${info.product.product_name}</td></tr>`).join('') +
             '</tbody>' +
-        '</table>';
+            '</table>';
 
         const htmlFilePath = path.join(__dirname, '../index.html');
 
@@ -72,18 +93,19 @@ const getBarcodes = async (req, res) => {
             res.status(200).send(finalHtml);
         });
     } catch (error) {
-         console.error('Fehler beim Abrufen der Barcodes:', error);
-        res.status(500).send('Interner Serverfehler'); 
+        console.error('Fehler beim Abrufen der Barcodes:', error);
+        res.status(500).send('Interner Serverfehler');
     }
 };
 
+app.get('/inventar/:profile', (req, res) => {
+    const selectedProfile = req.params.profile;
+    selectProfile(selectedProfile);
+    getBarcodes(req, res);
+});
 
-
-
-app.get('/barcodes', getBarcodes);
-
-
-const PORT = 3000; 
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server läuft auf http://localhost:${PORT}`);
 });
+

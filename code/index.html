@@ -13,20 +13,38 @@
     <link rel="stylesheet" href="./styles/components.css">
 
     <img id="logo-header" src="../footage/snacktrack-logo-ganz.png" alt="Logo">
-        <nav>
-            <ul>
-                <li><a href="../index.html">Inventar</a></li>
-                <li><a href="../pages/impressum.html">Impressum</a></li>
-            </ul>
-        </nav>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Inventar</a></li>
+            <li><a href="../pages/impressum.html">Impressum</a></li>
+        </ul>
+    </nav>
 </head>
 <body>
 
+    <!-- Buttons anstelle des Dropdown-Menüs -->
+    <button onclick="selectProfile('profile1')">Profile 1</button>
+    <button onclick="selectProfile('profile2')">Profile 2</button>
 
-    
     <!-- Platzhalter für dynamische Inhalte -->
     <div id="dynamic-content">
         <!-- Inhalte werden hier dynamisch eingefügt -->
     </div>
+
+    <script>
+        // Funktion zum Ändern der URL basierend auf dem ausgewählten Profil
+        function selectProfile(profile) {
+            // Definiere Basis-URL
+            var baseUrl = '/inventar/';
+
+            // Konstruiere die vollständige URL mit dem ausgewählten Profilnamen
+            var profileUrl = baseUrl + profile;
+
+            // Ändere die URL
+            window.location.href = profileUrl;
+        }
+    </script>
+
+    <script src="/scripts/getFirebase.js"></script>
 </body>
 </html>
