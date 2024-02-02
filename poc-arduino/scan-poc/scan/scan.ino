@@ -67,20 +67,7 @@ void setup() {
   Firebase.begin(&config, &auth);
   Firebase.reconnectWiFi(true);
 
-  // Eindeutige UUID generieren
-  String uniquePath = generateUUID();
-  Serial.println(uniquePath);
 
-  // Überprüfen und Eindeutigen Pfad erstellen
-  if (!Firebase.RTDB.getString(&fbdo, uniquePath.c_str())) {
-    if (Firebase.RTDB.setString(&fbdo, uniquePath.c_str(), "initialValue")) {
-      Serial.println("Eindeutiger Pfad erstellt: " + uniquePath);
-    } else {
-      Serial.println("Fehler beim Erstellen des eindeutigen Pfads");
-      Serial.println(fbdo.errorReason());
-      while (1); // Halt das Programm an, wenn ein Fehler auftritt
-    }
-  }
 
   pinMode(switchS, INPUT_PULLUP);
   pinMode(switchU, INPUT_PULLUP);
@@ -91,14 +78,12 @@ void loop() {
   int switchState = digitalRead(switchS);
   int switchUser = digitalRead(switchU);
   String uuid = generateUUID();
- // Serial.println("Unique: " + uuid);
 
   if (switchState == HIGH) {
     if (scannerSerial.available() > 0) {
       String barcodeData = scannerSerial.readStringUntil('\r');
       if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 1500 || sendDataPrevMillis == 0)) {
         sendDataPrevMillis = millis();
-
         String databasePath;
         if (switchUser == HIGH) {
           databasePath = uuid + "/inventarUserOne/" + barcodeData;
@@ -116,9 +101,9 @@ void loop() {
       Serial.println("Barcode-to-delete: " + barcodeDataDelete);
       String databasePath;
       if (switchUser == HIGH) {
-        databasePath = uniquePath + "/inventarUserOne/" + barcodeDataDelete;
+        databasePath = uuid + "/inventarUserOne/" + barcodeDataDelete;
       } else {
-        databasePath = uniquePath + "/inventarUserTwo/" + barcodeDataDelete;
+        databasePath = uuid + "/inventarUserTwo/" + barcodeDataDelete;
       }
       decreaseBarcodeCount(barcodeDataDelete, databasePath);
     }
