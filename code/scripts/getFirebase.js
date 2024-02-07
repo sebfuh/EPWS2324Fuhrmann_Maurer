@@ -17,9 +17,8 @@ admin.initializeApp({
 
 
 const db = admin.database();
-var userRef; // Deklariere userRef hier außerhalb der Funktion
+var userRef; 
 
-// Funktion zum Lesen einer externen HTML-Datei
 function readExternalHtmlFile(fileName, callback) {
     const filePath = path.join(__dirname, `../public/pages/start.html`);
     fs.readFile(filePath, 'utf8', (err, htmlContent) => {
@@ -33,7 +32,6 @@ function readExternalHtmlFile(fileName, callback) {
 }
 
 app.get('/', (req, res) => {
-    // Die externe HTML-Datei heißt start.html
     readExternalHtmlFile('start.html', (htmlContent) => {
         if (htmlContent) {
             res.status(200).send(htmlContent);
@@ -52,7 +50,6 @@ function selectProfile(selectedProfile) {
         profile2: "/3C71BFCD8E7C/inventarUserTwo"
     };
 
-    // Holen Sie den ausgewählten Pfad für das ausgewählte Profil
     userRef = db.ref(profilePaths[selectedProfile]);
 }
 
@@ -62,7 +59,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 const getBarcodes = async (req, res) => {
     try {
-        // Stelle sicher, dass selectProfile aufgerufen wurde, um userRef zu setzen
         if (!userRef) {
             return res.status(400).send('Profile wurde nicht ausgewählt');
         }
@@ -133,6 +129,6 @@ app.get('/inventar/:profile', (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Server läuft auf http://localhost:${PORT}/inventar/profile1`);
+    console.log(`Server läuft auf http://localhost:${PORT}`);
 });
 
