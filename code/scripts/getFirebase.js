@@ -6,6 +6,7 @@ const axios = require('axios');
 const app = express();
 
 var serviceAccount = require('../admin.json');
+const { start } = require('repl');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://ep-poc-f1041-default-rtdb.firebaseio.com",
@@ -17,6 +18,32 @@ admin.initializeApp({
 
 const db = admin.database();
 var userRef; // Deklariere userRef hier außerhalb der Funktion
+
+// Funktion zum Lesen einer externen HTML-Datei
+function readExternalHtmlFile(fileName, callback) {
+    const filePath = path.join(__dirname, `../public/pages/start.html`);
+    fs.readFile(filePath, 'utf8', (err, htmlContent) => {
+        if (err) {
+            console.error(`Fehler beim Lesen der HTML-Datei ${fileName}:`, err);
+            callback(null);
+        } else {
+            callback(htmlContent);
+        }
+    });
+}
+
+app.get('/', (req, res) => {
+    // Die externe HTML-Datei heißt start.html
+    readExternalHtmlFile('start.html', (htmlContent) => {
+        if (htmlContent) {
+            res.status(200).send(htmlContent);
+        } else {
+            res.status(500).send('Interner Serverfehler');
+        }
+    });
+});
+
+
 
 function selectProfile(selectedProfile) {
     // Definiere Pfade für jedes Profil

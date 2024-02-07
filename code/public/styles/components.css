@@ -147,6 +147,34 @@ td img {
 }
 
 
+/* Button
+############################################################################ */
+
+.button-container {
+    text-align: center;
+    margin-top: var(--xs);
+}
+
+.button-container button {
+    padding: var(--xs) var(--s); 
+    margin: var(--xs);
+    font-size: var(--m);
+    cursor: pointer;
+    background-color: var(--accent);
+    color: var(--lightest);
+    border: none;
+    border-radius: var(--s);
+}
+
+.button-container button:hover {
+    background-color: var(--accent-darker);
+}
+
+
+
+
+
+
 /* Footer
 ############################################################################ 
 
