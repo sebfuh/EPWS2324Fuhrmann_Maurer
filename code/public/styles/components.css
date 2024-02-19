@@ -2,7 +2,7 @@
 ############################################################################ */
 
 header {
-    background-color: var(--highlight);
+    background-color: var(--accent);
     padding: 15px;
     display: flex;
     justify-content: space-between;
