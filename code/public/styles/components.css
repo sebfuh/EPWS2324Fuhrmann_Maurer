@@ -2,8 +2,8 @@
 ############################################################################ */
 
 header {
-    background-color: var(--accent);
-    padding: 15px;
+    background: linear-gradient(to bottom, var(--accent-darker), var(--secondary));
+     padding: 15px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -127,21 +127,18 @@ td img {
 }
 
 .scroll-container {
-    max-height: 600px; /* gewünschte maximale Höhe für die Scrollbar */
+    max-height: 600px; 
     overflow: auto;
 }
 
 .meine-liste {
     list-style-type: none;
-    padding: 0;
-    margin: 0; 
 }
 
 .meine-liste li {
     background-color: var(--secondary-darker);
     color: var(--darkest);
     padding: 10px;
-    margin: 5px 0;
     border-radius: 5px;
     max-width: 600px;
 }
@@ -151,8 +148,9 @@ td img {
 ############################################################################ */
 
 .button-container {
-    text-align: left;
-    margin-top: var(--xs);
+    text-align: center;
+    margin-top: var(--m);
+    margin-left: var(--xxl);
 }
 
 .button-container button {
@@ -163,6 +161,8 @@ td img {
     color: var(--lightest);
     border: none;
     border-radius: var(--xs);
+    margin-left: var(--xl);
+    margin-right: var(--xl);
 }
 
 .button-container button:hover {
@@ -172,18 +172,19 @@ td img {
 
 
 /* Footer
-############################################################################ 
+############################################################################ */
 
 footer {
-    background-color: var(--darkest); 
+    background: var(--secondary-darker);
     color: var(--secondary); 
-    padding: var(--xxs); 
+    padding: var(--xs); 
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 .footer-content {
     display: flex;
@@ -191,26 +192,8 @@ footer {
     align-items: center;
 }
 
-.footer-content-left {
-    display: flex;
-    align-items: center;
-}
 
-#footer-logo {
-    width: 100px; 
-}
 
-.footer-content-right {
-    display: flex;
-}
-
-.footer-content-right a {
-    color: var(--secondary);
-    text-decoration: none;
-    margin-right: 15px;
-}
-
-/* Media Query für kleinere Geräte 
 @media only screen and (max-width: 600px) {
     .footer-content {
         flex-direction: column;
@@ -229,4 +212,3 @@ footer {
         margin-right: 0;
     }
 }
-*/
