@@ -7,20 +7,21 @@ const app = express();
 
 var serviceAccount = require('../admin.json');
 const { start } = require('repl');
+const e = require('express');
+const { url } = require('inspector');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://ep-poc-f1041-default-rtdb.firebaseio.com",
     authDomain: "ep-poc-f1041.firebaseapp.com",
 });
 
-
-
-
 const db = admin.database();
 var userRef; 
 
-function readExternalHtmlFile(fileName, callback) {
-    const filePath = path.join(__dirname, `../public/pages/start.html`);
+
+//ID des Geräts
+function readLoginHtml(fileName, callback) {
+    const filePath = path.join(__dirname, `../public/pages/login.html`);
     fs.readFile(filePath, 'utf8', (err, htmlContent) => {
         if (err) {
             console.error(`Fehler beim Lesen der HTML-Datei ${fileName}:`, err);
@@ -32,7 +33,7 @@ function readExternalHtmlFile(fileName, callback) {
 }
 
 app.get('/', (req, res) => {
-    readExternalHtmlFile('start.html', (htmlContent) => {
+    readLoginHtml('login.html', (htmlContent) => {
         if (htmlContent) {
             res.status(200).send(htmlContent);
         } else {
@@ -41,22 +42,42 @@ app.get('/', (req, res) => {
     });
 });
 
-
-
-function selectProfile(selectedProfile) {
-    // Definiere Pfade für jedes Profil
-    var profilePaths = {
-        profile1: "/3C71BFCD8E7C/inventarUserOne",
-        profile2: "/3C71BFCD8E7C/inventarUserTwo"
-    };
-
-    userRef = db.ref(profilePaths[selectedProfile]);
+//Start Page Benutzerwahl 
+function readStartHtml(fileName, callback) {
+    const filePath = path.join(__dirname, `../public/pages/start.html`);
+    fs.readFile(filePath, 'utf8', (err, htmlContent) => {
+        if (err) {
+            console.error(`Fehler beim Lesen der HTML-Datei ${fileName}:`, err);
+            callback(null);
+        } else {
+            callback(htmlContent);
+        }
+    });
 }
 
+app.get('/start', (req, res) => {
+    readStartHtml('start.html', (htmlContent) => {
+        if (htmlContent) {
+            res.status(200).send(htmlContent);
+        } else {
+            res.status(500).send('Interner Serverfehler');
+        }
+    });
+}); 
+
+
+function selectProfile(selectedProfile, enteredId) {
+
+        var profilePaths = {
+            profile1: `/${enteredId}/inventarUserOne`,
+            profile2: `/${enteredId}/inventarUserTwo`
+        };
+        userRef = db.ref(profilePaths[selectedProfile]);
+   
+}
 
 const OPEN_FOOD_FACTS_API_URL = 'https://world.openfoodfacts.org/api/v0/product/';
-app.use(express.static(path.join(__dirname, '../public')));
-
+app.use(express.static(path.join(__dirname, '../public'))); 
 const getBarcodes = async (req, res) => {
     try {
         if (!userRef) {
@@ -121,14 +142,22 @@ const getBarcodes = async (req, res) => {
     }
 };
 
-app.get('/inventar/:profile', (req, res) => {
+
+
+app.get('/:id/:profile', (req, res) => {
+
     const selectedProfile = req.params.profile;
-    selectProfile(selectedProfile);
+    const enteredId = req.params.id;
+
+    selectProfile(selectedProfile, enteredId); 
     getBarcodes(req, res);
+    
 });
+
+
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server läuft auf http://localhost:${PORT}`);
 });
-

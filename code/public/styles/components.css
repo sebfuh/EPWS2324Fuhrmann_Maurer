@@ -151,27 +151,23 @@ td img {
 ############################################################################ */
 
 .button-container {
-    text-align: center;
+    text-align: left;
     margin-top: var(--xs);
 }
 
 .button-container button {
     padding: var(--xs) var(--s); 
-    margin: var(--xs);
-    font-size: var(--m);
+    font-size: var(--s);
     cursor: pointer;
     background-color: var(--accent);
     color: var(--lightest);
     border: none;
-    border-radius: var(--s);
+    border-radius: var(--xs);
 }
 
 .button-container button:hover {
     background-color: var(--accent-darker);
 }
-
-
-
 
 
 

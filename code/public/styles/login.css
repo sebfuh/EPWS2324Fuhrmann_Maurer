@@ -1,0 +1,23 @@
+form {
+    margin: var(--m);
+    background-color: var(--secondary);
+    padding: var(--m);
+    border-radius: var(--xs);
+    box-shadow: 0 0 var(--s) rgba(0, 0, 0, 0.1);
+    width: var(--max-width-content/2);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+

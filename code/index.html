@@ -33,11 +33,17 @@
         <!-- Inhalte werden hier dynamisch eingefügt -->
     </div>
 
-     <script>
+
+    
+    <script>
+        // Fkt zur Auswahl welches Inventar angezeigt werden soll
         function selectProfile(profile) {
-            var baseUrl = '/inventar/';
-            var profileUrl = baseUrl + profile;
-            window.location.href = profileUrl;
+            if (profile === 'profile1') {
+                window.location.href = `profile1`;
+            } else if (profile === 'profile2') {
+                window.location.href = `profile2`;
+            }
+           
         }
     </script> 
 

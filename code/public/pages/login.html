@@ -9,18 +9,26 @@
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/components.css">
     <link rel="stylesheet" href="../styles/start.css">
+    <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
 
     <div class="splash-screen" id="splashScreen">
         <img src="../footage/snacktrack-logo-ganz.png" alt="Logo">
 
-        <div class="button-container">
-            <button onclick="window.location.href=`${new URLSearchParams(window.location.search).get('id')}/profile1`">Benutzer 1</button>
-            <button onclick="window.location.href=`${new URLSearchParams(window.location.search).get('id')}/profile2`">Benutzer 2</button>
-    
-        </div>
+        <form method="get" action="/start"> 
+            <!-- <form method="get" action="/start/:id">  -->
+            <div class="button-container">
+                <label for="id">Gerätenummer:</label>
+                <input type="text" id="id" name="id" required>
+                <button type="submit">Anmelden</button>
+            </div>
+        </form>
+
     </div>
 
+
+
+    <script src="/public/scripts/getFirebase.js"></script>
 </body>
 </html>
