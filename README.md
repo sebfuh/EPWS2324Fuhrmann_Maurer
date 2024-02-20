@@ -10,33 +10,6 @@
 link: https://modern-oatmeal-3af.notion.site/Entwicklungsprojekt-237c60b22ae0411383fa90e491e709b3?pvs=4
 
 
-## Architekturmodell
-
-<img width="520" alt="Architekturmodell" src="https://github.com/sebfuh/EPWS2324Fuhrmann_Maurer/assets/92530724/0c417b01-3a0f-4e40-b190-569ddf3b2973">
-
-
-## Style Prototype
-Der in Figma angefertigte Design Prototype kann unter folgenden Links abgerufen werden:
-    - Desktop Version: https://www.figma.com/proto/MUbH2I6k6Payi9Em3XGpp0/snackTrack?page-id=0%3A1&type=design&node-id=3-538&viewport=-616%2C-115%2C0.51&t=qWLuklvVaLPSPSLs-1&scaling=scale-down&starting-point-node-id=3%3A538&mode=design
-    - Mobile Version: https://www.figma.com/proto/MUbH2I6k6Payi9Em3XGpp0/snackTrack?page-id=88%3A48&type=design&node-id=88-53&viewport=-10%2C-45%2C1.49&t=ypoM6CpmxFAoCmdx-1&scaling=scale-down&starting-point-node-id=88%3A49&mode=design
-
-![designPrototypeMockup](footage/design-prototype-mockup.png)
-
-
-## Styleguide
-![styleguide](footage/styleguide.svg)
-
-
-
-## Artefakte 1. Audit (Ordner "Artefakte"):
-- Projektplan
-- Stakeholder
-- Persona 
-- Domänenmodell deskriptiv / präskriptiv
-- Task Scenario
-- Use Scenario
-
-
 # Exposé: 
 **System zur einfachen Erkennung und Organisation von Lebensmitteln** 
 
@@ -67,3 +40,14 @@ Die Umsetzung der oben genannten Ziele erfordert eine intelligente Verbindung vo
 **Ressourcen**:
 
 Die Projektidee klingt vielversprechend und könnte die Art und Weise, wie Menschen ihre Lebensmittel verwalten und Einkäufe planen erheblich verbessern. Die Umsetzung erfordert jedoch eine sorgfältige Planung und Entwicklung, um die oben genannten Herausforderungen zu bewältigen und eine erfolgreiche Anwendung/Website zu schaffen.
+
+
+
+## Artefakte 1. Audit (Ordner "Artefakte"):
+- Projektplan
+- Stakeholder
+- Persona 
+- Domänenmodell deskriptiv / präskriptiv
+- Task Scenario
+- Use Scenario
+
