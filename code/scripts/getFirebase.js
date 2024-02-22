@@ -90,7 +90,7 @@ const getBarcodes = async (req, res) => {
 
         if (!barcodesObject) {
             // Wenn keine Barcodes vorhanden sind, zeige eine leere Liste an
-            const htmlList = '<p>Keine Barcodes vorhanden.</p>';
+            const htmlList = '<p>Keine Produkte vorhanden.</p>';
             const htmlFilePath = path.join(__dirname, '../index.html');
 
             fs.readFile(htmlFilePath, 'utf8', (err, htmlTemplate) => {
