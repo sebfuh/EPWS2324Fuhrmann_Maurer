@@ -2,6 +2,10 @@
 
 
 <img width="976" alt="snacktrack-logo-ganz-light@2x" src="https://github.com/sebfuh/EPWS2324Fuhrmann_Maurer/assets/116002806/dea6fbc1-ac0a-43fc-a63f-6b95ba2cec28">
+https://snack-track.onrender.com/
+
+
+
 
 ## Eine Ausführliche und strukturierte Sammlung der Projektergebnisse sind im Wiki des Repositorys zu finden 
 
