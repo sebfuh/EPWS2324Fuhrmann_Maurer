@@ -19,7 +19,7 @@ const db = admin.database();
 var userRef; 
 
 
-//ID des Geräts
+//ID des Geräts eingeben 
 function readLoginHtml(fileName, callback) {
     const filePath = path.join(__dirname, `../public/pages/login.html`);
     fs.readFile(filePath, 'utf8', (err, htmlContent) => {
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
     });
 });
 
-//Start Page Benutzerwahl 
+//Start - Benutzerwahl 
 function readStartHtml(fileName, callback) {
     const filePath = path.join(__dirname, `../public/pages/start.html`);
     fs.readFile(filePath, 'utf8', (err, htmlContent) => {
@@ -81,19 +81,40 @@ app.use(express.static(path.join(__dirname, '../public')));
 const getBarcodes = async (req, res) => {
     try {
         if (!userRef) {
-            return res.status(400).send('Profile wurde nicht ausgewählt');
+            return res.status(400).send('Profil wurde nicht ausgewählt');
         }
 
         // Daten aus Firebase abrufen
         const snapshot = await userRef.once('value');
-        const barcodes = Object.keys(snapshot.val());
+        const barcodesObject = snapshot.val();
+
+        if (!barcodesObject) {
+            // Wenn keine Barcodes vorhanden sind, zeige eine leere Liste an
+            const htmlList = '<p>Keine Barcodes vorhanden.</p>';
+            const htmlFilePath = path.join(__dirname, '../index.html');
+
+            fs.readFile(htmlFilePath, 'utf8', (err, htmlTemplate) => {
+                if (err) {
+                    console.error('Fehler beim Lesen der HTML-Datei:', err);
+                    return res.status(500).send('Interner Serverfehler');
+                }
+
+                const finalHtml = htmlTemplate.replace('<!-- Inhalte werden hier dynamisch eingefügt -->', htmlList);
+
+                res.status(200).send(finalHtml);
+            });
+            return;
+        }
+
+        const barcodes = Object.keys(barcodesObject);
 
         // Informationen für jeden Barcode von der Open Food Facts API abrufen
         const productInfoPromises = barcodes.map(async (barcode) => {
             try {
                 const response = await axios.get(`${OPEN_FOOD_FACTS_API_URL}${barcode}.json`);
                 const product = response.data.product;
-                const barcodeValue = snapshot.val()[barcode];
+                const barcodeValue = barcodesObject[barcode];
+
                 if (barcodeValue > 0) {
                     if (product && product.product_name) {
                         return { barcode, product, barcodeValue };
@@ -104,7 +125,7 @@ const getBarcodes = async (req, res) => {
                     return null;
                 }
             } catch (error) {
-                return { barcode, product: { product_name: 'Nicht gefunden' }, barcodeValue };
+                return { barcode, product: { product_name: 'Nicht gefunden' }, barcodeValue: null };
             }
         });
 
@@ -141,8 +162,6 @@ const getBarcodes = async (req, res) => {
         res.status(500).send('Interner Serverfehler');
     }
 };
-
-
 
 app.get('/:id/:profile', (req, res) => {
 

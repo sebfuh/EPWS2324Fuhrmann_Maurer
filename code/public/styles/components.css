@@ -60,7 +60,6 @@ nav a {
     }
 }
 
-
 /* Tabelle (Inventar)
 ############################################################################ */
 
@@ -91,11 +90,9 @@ th {
     background-color: var(--accent);
 }
 
-
 td img {
     /* width: var(--xxl); */
     height: var(--xxl);  
-
 }
 
 /* Media Query für kleinere Geräte */
@@ -108,11 +105,6 @@ td img {
         height: 30px; /* Festlegen der Bildhöhe auf 30px für kleinere Bildschirme */
     }
 }
-
-
-
-
-
 
 /* Liste (Inventar)
 ############################################################################ */
@@ -143,7 +135,6 @@ td img {
     max-width: 600px;
 }
 
-
 /* Button
 ############################################################################ */
 
@@ -169,8 +160,6 @@ td img {
     background-color: var(--accent-darker);
 }
 
-
-
 /* Footer
 ############################################################################ */
 
@@ -181,18 +170,13 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-
-
 }
-
 
 .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-
 
 @media only screen and (max-width: 600px) {
     .footer-content {
